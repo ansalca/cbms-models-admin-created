@@ -13,12 +13,12 @@
                 <a class="nav-link highlights mr-lg-3" href="/"><i class="fas fa-home"></i> Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link highlights mr-lg-3" href="{% url 'home' %}#servicesSection"><i class="fa-solid fa-gears"></i>Services</a>
+                <a class="nav-link highlights mr-lg-3" href="#servicesSection"><i class="fa-solid fa-gears"></i>Services</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link highlights mr-lg-3" href="#footerSection"><i class="fa-solid fa-headset"></i>Contact</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link highlights mr-lg-3" href="{% url 'dashboard' %}"><i class="fas fa-chart-line"></i> Dashboard</a>
             </li>
         </ul>
@@ -69,8 +69,8 @@
                 <div class="mt-5 p-3">
                     <h5 class="title">Access Your Account</h5>
                     <div>
-                        <a href="{% url 'login' %}" class="text-white">
-                            <button class="btn m-3 custom-btn btn-1 text-white" id="user-login-btn"> User Login
+                        <a href="/accounts/login" class="text-white">
+                            <button class="btn m-3 custom-btn btn-1 text-white"> User Login
                             </button>
                         </a>
                     </div>

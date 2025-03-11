@@ -1,8 +1,9 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import register, user_login, user_logout, CustomPasswordResetView, CustomPasswordResetConfirmView, home, view_users, add_user, edit_user
+from .views import register, user_login, user_logout, CustomPasswordResetView, CustomPasswordResetConfirmView, home, view_users, add_user, edit_user, dashboard
 
 urlpatterns = [
+    path('dashboard/', dashboard, name='dashboard'),
     path('register/', register, name='register'),
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
