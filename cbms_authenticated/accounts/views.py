@@ -1,29 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView
-from django.shortcuts import render, redirect
-from .forms import RegisterForm, LoginForm, CustomPasswordResetForm, CustomSetPasswordForm
-from .models import User
-
-def register(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            department = form.cleaned_data.get('department')
-            date_of_birth = form.cleaned_data.get('date_of_birth')
-            address = form.cleaned_data.get('address')
-            group = form.cleaned_data.get('group')
-            user.groups.add(group)
-            login(request, user)
-            messages.success(request, 'Registration successful.')
-            return redirect('dashboard')
-        else:
-            messages.error(request, 'Unsuccessful registration. Invalid information.')
-    else:
-        form = RegisterForm()
-    return render(request, 'accounts/register.html', {'form': form})
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import LoginForm, CustomPasswordResetForm, CustomSetPasswordForm, StudentUserForm
+from .models import User, Staff, Student, Driver, Parent
 
 def user_login(request):
     if request.method == 'POST':
@@ -55,37 +36,44 @@ def home(request):
     return render(request, 'home.html')
 
 @login_required
-@permission_required('auth.view_user', raise_exception=True)
-def view_users(request):
-    users = User.objects.all()
-    return render(request, 'accounts/view_users.html', {'users': users})
-
-@login_required
-@permission_required('auth.change_user', raise_exception=True)
-def edit_user(request, user_id):
-    user = User.objects.get(id=user_id)
-    if request.method == 'POST':
-        form = RegisterForm(request.POST, instance=user)
-        if form.is_valid():
-            form.save()
-            return redirect('view_users')
-    else:
-        form = RegisterForm(instance=user)
-    return render(request, 'accounts/edit_user.html', {'form': form})
-
-@login_required
-@permission_required('auth.add_user', raise_exception=True)
-def add_user(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('view_users')
-    else:
-        form = RegisterForm()
-    return render(request, 'accounts/add_user.html', {'form': form})
-
-@login_required
 def dashboard(request):
-    users = User.objects.all()
-    return render(request, 'dashboard.html', {'users': users})
+    user = request.user
+    staff_or_student_roles = ["Staff", "Student", "Parent"]
+
+    if user.role == 'Staff':
+        user.get_profile = get_object_or_404(Staff, user=user)
+        bus = user.get_profile.bus
+        students = Student.objects.filter(bus=bus)
+        staff_members = Staff.objects.filter(bus=bus)
+        driver = bus.driver if bus else None
+    elif user.role in ['Student', 'Parent']:
+        if user.role == 'Student':
+            user.get_profile = get_object_or_404(Student, user=user)
+            bus = user.get_profile.bus
+        elif user.role == 'Parent':
+            user.get_profile = get_object_or_404(Parent, user=user)
+            # Assuming a parent can have only one student
+            student = user.get_profile.students.first()
+            bus = student.bus if student else None
+        students = Student.objects.filter(bus=bus) if bus else None
+        staff_members = Staff.objects.filter(bus=bus) if bus else None
+        driver = bus.driver if bus else None
+    else:
+        user.get_profile = None
+        bus = None
+        students = None
+        staff_members = None
+        driver = None
+
+    return render(
+        request,
+        'dashboard.html',
+        {
+            'user': user,
+            'bus': bus,
+            'staff_or_student_roles': staff_or_student_roles,
+            'students': students,
+            'staff_members': staff_members,
+            'driver': driver
+        }
+    )

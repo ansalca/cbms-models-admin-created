@@ -6,7 +6,7 @@ from .models import User, Staff, Student, Parent, Bus, Driver, IncidentReport
 class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'contact_number')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'contact_number', 'address', 'date_of_birth')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
         ('Role', {'fields': ('role',)}),
@@ -14,7 +14,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'password1', 'password2', 'role'),
+            'fields': ('username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'contact_number', 'address', 'date_of_birth', 'role'),
         }),
     )
     list_display = ('username', 'role', 'first_name', 'last_name', 'is_staff', 'contact_number')
@@ -23,9 +23,9 @@ class UserAdmin(BaseUserAdmin):
 
 # Custom Staff admin
 class StaffAdmin(admin.ModelAdmin):
-    list_display = ('user', 'position', 'bus')
-    search_fields = ('user__username', 'position', 'bus__plate_number')
-    list_filter = ('position',)
+    list_display = ('user', 'department', 'boarding_point', 'bus')
+    search_fields = ('user__username', 'department', 'bus__plate_number')
+    list_filter = ('department',)
 
 # Custom Student admin
 class StudentAdmin(admin.ModelAdmin):

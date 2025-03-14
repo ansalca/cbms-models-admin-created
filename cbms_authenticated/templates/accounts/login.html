@@ -35,6 +35,11 @@
         <button type="submit" class="btn m-3 custom-btn btn-1">Login</button>
         <br/>
         <a href="{% url 'password_reset' %}">Forgot Password?</a>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="text-danger"> {{ message }}</p>
+            {% endfor %}
+        {% endif %}
     </form>
 </div>
 {% endblock %}

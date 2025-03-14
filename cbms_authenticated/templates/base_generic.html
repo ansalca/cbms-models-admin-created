@@ -22,20 +22,32 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-
+{% include 'navbar.html' %}
 <div class="bg-container">
     {% block content %}
     {% endblock %}
 </div>
 <div class="bg-light text-center p-5">
-    <h2 class="heading highlights text-dark">Contact Us</h2>
-    <h5>Akash&Team</h5>
+    <h2 class="heading highlights text-dark">Contact Us only with the Password!</h2>
+    <div id="carouselExampleSlidesOnly" class="carousel slide m-3" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item">
+                <h5>If the hero changes, It'll turn into a different story</h5>
+            </div>
+            <div class="carousel-item active">
+                <h5>What is the real identity of the king that you must protect</h5>
+            </div>
+        </div>
+    </div>
+
+
     <a href="tel:+919495060064" class="title" target="_blank"> &nbsp;+91 9495060064</a>
     <br/>
     <a href="mailto:ansalanu919@gmail.com" class="title" target="_blank"> &nbsp;japz01101@gmail.com</a>
 </div>
 {% include 'footer.html' %}
 <script src="{% static 'script.js' %}"></script>
-<script type="text/javascript" src="https://new-assets.ccbp.in/frontend/content/static-ccbp-ui-kit/static-ccbp-ui-kit.js"></script>
+<script type="text/javascript"
+        src="https://new-assets.ccbp.in/frontend/content/static-ccbp-ui-kit/static-ccbp-ui-kit.js"></script>
 </body>
 </html>

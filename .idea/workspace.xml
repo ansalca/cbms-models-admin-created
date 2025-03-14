@@ -5,14 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cedd33d4-cdcc-4bd7-85b7-5328d3f45f67" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/cbms_authenticated_1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cbms_authenticated/accounts/migrations/0003_rename_position_staff_department_remove_staff_bus_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cbms_authenticated/accounts/migrations/0004_remove_staff_bus_no_remove_student_bus_no_staff_bus_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cbms_authenticated/accounts/migrations/0005_alter_user_role.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/add_student.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cbms_authenticated/templates/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cbms_authenticated/accounts/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/accounts/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cbms_authenticated/accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/accounts/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cbms_authenticated/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/accounts/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cbms_authenticated/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/accounts/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cbms_authenticated/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/accounts/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cbms_authenticated/cbms_authenticated/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/cbms_authenticated/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cbms_authenticated/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cbms_authenticated/static/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/static/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cbms_authenticated/static/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/static/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/add_user.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/edit_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/edit_student.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/password_reset.html" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/password_reset.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/password_reset_complete.html" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/password_reset_complete.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/password_reset_confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/password_reset_confirm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/password_reset_done.html" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/password_reset_done.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cbms_authenticated/templates/accounts/view_users.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cbms_authenticated/templates/base_generic.html" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/templates/base_generic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cbms_authenticated/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/templates/dashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cbms_authenticated/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/cbms_authenticated/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cbms_authenticated/templates/test_forms.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

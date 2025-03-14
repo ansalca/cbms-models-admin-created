@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager, Group, Permission
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 
 # Custom User Manager for better user creation
@@ -26,7 +28,6 @@ class UserManager(BaseUserManager):
 # Custom User Model with Roles
 class User(AbstractUser):
     ROLE_CHOICES = [
-        ('Admin', 'Admin'),
         ('Staff', 'Staff'),
         ('Student', 'Student'),
         ('Driver', 'Driver'),
@@ -35,13 +36,15 @@ class User(AbstractUser):
 
     contact_number = models.CharField(max_length=15, blank=True, null=True)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='Student')
+    address = models.CharField(max_length=255, blank=True, null=True)
+    date_of_birth = models.DateField(null=True, blank=True)
     groups = models.ManyToManyField(Group, related_name='custom_user_groups', blank=True)
     user_permissions = models.ManyToManyField(Permission, related_name='custom_user_permissions', blank=True)
 
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'contact_number', 'address', 'date_of_birth']
 
     def __str__(self):
         return self.username
@@ -50,22 +53,24 @@ class User(AbstractUser):
 # Staff Model
 class Staff(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    position = models.CharField(max_length=100)
+    department = models.CharField(max_length=100)
+    boarding_point = models.CharField(max_length=100, blank=True, null=True)
     bus = models.ForeignKey('Bus', on_delete=models.SET_NULL, null=True, blank=True, related_name='staffs')
 
     def __str__(self):
-        return f'{self.user.username} - {self.position}'
+        return f'{self.user.username} - {self.department}'
 
 
 # Student Model
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.CharField(max_length=100)
+    boarding_point = models.CharField(max_length=100, blank=True, null=True)
+    bus = models.ForeignKey('Bus', on_delete=models.SET_NULL, null=True, blank=True, related_name='students')
     year = models.PositiveIntegerField()
     bus_fare_amount = models.FloatField()
     payment_status = models.BooleanField(default=False)
     parent = models.ForeignKey('Parent', on_delete=models.SET_NULL, null=True, blank=True, related_name='students')
-    bus = models.ForeignKey('Bus', on_delete=models.SET_NULL, null=True, blank=True, related_name='students')
 
     def __str__(self):
         return self.user.username
@@ -110,3 +115,12 @@ class IncidentReport(models.Model):
 
     def __str__(self):
         return f'Incident by {self.user.username} on {self.timestamp}'
+
+
+# Signal to delete parent if no other students are associated
+@receiver(post_delete, sender=Student)
+def delete_parent_if_no_students(sender, instance, **kwargs):
+    parent = instance.parent
+    if parent and not parent.students.exists():
+        parent.user.delete()
+        parent.delete()

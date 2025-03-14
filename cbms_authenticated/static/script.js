@@ -12,3 +12,9 @@ sendButton.addEventListener('click', () => {
         messageInput.value = '';
     }
 });
+
+document.getElementById('confirmDelete').addEventListener('click', function() {
+    // Add your delete action here
+    alert('Item deleted successfully!');
+    $('#deleteModal').modal('hide');
+  });
